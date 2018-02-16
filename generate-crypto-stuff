@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 #
-# Generate everything you need to test self-signed certificates with nginx.
-# Instructions:
-#
-# 1. Run this with no arguments. 
-#
-# 2. When it asks you for any password or passphrase, use "test". 
-#
-# 3. When it asks for information about your organization, department, etc, 
-#    use "ca", "client", "server" for everything, accordingly with which step 
-#    you're on.
+# See README.md
 
 set -o errexit
 set -o pipefail

@@ -1,4 +1,14 @@
-# Generate the crypto stuff
+# Overview
+
+Instructions and a tool to set up a testbed for client-side SSL certificates.
+
+WARNING: I have no idea what I'm doing when it comes to
+crypto/security/certificates. This is just a documentation of what I got to
+work. I'm sure it's full of horrible practices for production usage.
+
+# Instructions
+
+## Generate the crypto stuff
 
 1. Run `generate-crypto-stuff` with no arguments. 
 2. When it asks you for any password or passphrase, use "test". 
@@ -6,7 +16,7 @@
    "ca", "client", "server" for everything, accordingly with which step you're
    on.
 
-# Install the server-side part in nginx
+## Install the server-side part in nginx
 
 1. In your nginx config file, uncomment the "SSL server" section.
 2. The template should have `ssl_certificate` and `ssl_certificate_key`. Set
@@ -14,9 +24,9 @@
 3. Add `ssl_client_certificate /path/to/ca.crt` and `ssl_verify_client on`
 4. Restart nginx.
 
-# Install the client cert in your OS/browser
+## Install the client cert in your OS/browser
 
-## Chrome on Mac
+### Chrome on Mac
 
 1. Open "Keychain Access".
 2. "File > Import Items".
@@ -25,9 +35,9 @@
    instructions above.
 5. You should now see "client" under "login/My Certificates".
 
-# Test it
+## Test it
 
-## Chrome on Mac
+### Chrome on Mac
 
 1. Navigate to https://localhost (you may need a port if you're not using the
    default of 443).

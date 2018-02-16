@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# Generate everything you need to test self-signed certificates with nginx.
+# Instructions:
+#
+# 1. Run this with no arguments. 
+#
+# 2. When it asks you for any password or passphrase, use "test". 
+#
+# 3. When it asks for information about your organization, department, etc, 
+#    use "ca", "client", "server" for everything, accordingly with which step 
+#    you're on.
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+echo "########## Creating CA stuff"
+openssl genrsa -des3 -out ca.key 4096 # CA key
+openssl req -new -x509 -days 365 -key ca.key -out ca.crt # CA cert
+
+echo "########## Creating client stuff"
+openssl genrsa -des3 -out client.key 4096 # Client key
+openssl req -new -key client.key -out client.csr # Client signing request
+openssl x509 -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt # Client cert
+openssl pkcs12 -export -clcerts -in client.crt -inkey client.key -out client.p12 # Client cert+key
+openssl verify -CAfile ca.crt client.crt # Verify client
+
+# Create a server key and cert, sign the cert
+echo "########## Creating server stuff"
+openssl genrsa -out server.key 2048 # Server key
+openssl req -key server.key -new -sha256 -out server.csr # Server signing request
+openssl x509 -req -days 360 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -sha256 # Server cert
+openssl verify -CAfile ca.crt server.crt # Verify server
+
+echo "########## Created all crypto stuff"
+
+# Put this config in nginx
+#    server {
+#        listen       443 ssl;
+#        server_name  localhost;
+#
+#        ssl_client_certificate /Users/arc/Projects/client-cert/ca.crt;
+#        ssl_verify_client on;
+#
+#        ssl_certificate      /Users/arc/Projects/client-cert/server.crt;
+#        ssl_certificate_key  /Users/arc/Projects/client-cert/server.key;
+#
+#        ssl_session_cache    shared:SSL:1m;
+#        ssl_session_timeout  5m;
+#
+#        ssl_ciphers  HIGH:!aNULL:!MD5;
+#        ssl_prefer_server_ciphers  on;
+#
+#        location / {
+#            root   html;
+#            index  index.html index.htm;
+#        }
+#    }
+
+# Start nginx
+
+# Import the p12 file into Keychain

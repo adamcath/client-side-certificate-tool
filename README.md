@@ -23,8 +23,8 @@ work. I'm sure it's full of horrible practices for production usage.
 2. When it asks you for any password or passphrase, use "test". 
 3. When it asks for information about your organization, department, etc, use
    "ca", "client", "server" for everything, accordingly with which step you're
-   on, *except* when you're on the server section and it asks you for a common
-   name. For that, you *must* use the DNS name of the server that you'll be
+   on, *except* when you're on the server section and it asks you for the "Common
+   Name". For that, you *must* use the DNS name of the server that you'll be
    typing into the browser. It's okay if that's a local address (on Mac, you can
    use the name that appears under "System Preferences > Sharing", where it says
    "computers on your local network can access your computer at").

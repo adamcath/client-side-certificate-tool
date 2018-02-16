@@ -39,7 +39,7 @@ work. I'm sure it's full of horrible practices for production usage.
 
 ## Install the client cert in your OS/browser
 
-### Chrome on Mac
+### Mac (Chrome, Safari)
 
 1. Open "Keychain Access".
 2. "File > Import Items".
@@ -50,8 +50,8 @@ work. I'm sure it's full of horrible practices for production usage.
 
 ## Test it
 
-### Chrome on Mac
+### Mac (Chrome, Safari)
 
-1. Navigate to https://localhost (you may need a port if you're not using the
-   default of 443).
+1. Navigate to your server's address. This must match the "Common Name" you used
+   when generated the server cert.
 2. You should get a popup asking you which certificate to use.

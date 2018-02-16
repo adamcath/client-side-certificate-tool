@@ -24,31 +24,4 @@ openssl req -key server.key -new -sha256 -out server.csr # Server signing reques
 openssl x509 -req -days 360 -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -sha256 # Server cert
 openssl verify -CAfile ca.crt server.crt # Verify server
 
-echo "########## Created all crypto stuff"
-
-# Put this config in nginx
-#    server {
-#        listen       443 ssl;
-#        server_name  localhost;
-#
-#        ssl_client_certificate /Users/arc/Projects/client-cert/ca.crt;
-#        ssl_verify_client on;
-#
-#        ssl_certificate      /Users/arc/Projects/client-cert/server.crt;
-#        ssl_certificate_key  /Users/arc/Projects/client-cert/server.key;
-#
-#        ssl_session_cache    shared:SSL:1m;
-#        ssl_session_timeout  5m;
-#
-#        ssl_ciphers  HIGH:!aNULL:!MD5;
-#        ssl_prefer_server_ciphers  on;
-#
-#        location / {
-#            root   html;
-#            index  index.html index.htm;
-#        }
-#    }
-
-# Start nginx
-
-# Import the p12 file into Keychain
+echo "########## Created all crypto stuff!"

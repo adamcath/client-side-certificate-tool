@@ -8,6 +8,15 @@ work. I'm sure it's full of horrible practices for production usage.
 
 # Instructions
 
+## Install nginx and openssl (skip if you have them)
+
+### On Mac
+
+1. `brew install nginx`.
+2. Your config file will be in `/usr/local/etc/nginx/nginx.conf`.
+3. `sudo nginx`. You need sudo beause you'll be using port 443.
+4. `brew install openssl`.
+
 ## Generate the crypto stuff
 
 1. Run `generate-crypto-stuff` with no arguments. 
